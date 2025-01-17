@@ -1,5 +1,6 @@
 import 'package:event_planning/auth/screens/login_screen.dart';
 import 'package:event_planning/auth/screens/register_screen.dart';
+import 'package:event_planning/home_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'app_theme.dart';
@@ -18,9 +19,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         LoginScreen.routeName: (context) => LoginScreen(),
-        RegisterScreen.routeName: (context) => RegisterScreen()
+        RegisterScreen.routeName: (context) => RegisterScreen(),
+        HomeScreen.routeName: (context) => HomeScreen(),
       },
-      initialRoute: LoginScreen.routeName,
+      initialRoute: HomeScreen.routeName,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       themeMode: ThemeMode.light,

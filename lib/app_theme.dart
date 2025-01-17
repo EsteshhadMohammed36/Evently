@@ -13,6 +13,28 @@ class AppTheme {
   static ThemeData light = ThemeData(
       scaffoldBackgroundColor: backgroundLight,
       primaryColor: primary,
+      bottomAppBarTheme: BottomAppBarTheme(
+        color: primary,
+      ),
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: primary,
+          foregroundColor: white,
+          shape: CircleBorder(side: BorderSide(width: 5, color: white))),
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        showUnselectedLabels: true,
+        selectedItemColor: white,
+        unselectedItemColor: white,
+        selectedLabelStyle: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 12,
+        ),
+        unselectedLabelStyle: TextStyle(
+          fontWeight: FontWeight.bold,
+          fontSize: 12,
+        ),
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: primary,
+      ),
       appBarTheme: AppBarTheme(
           backgroundColor: backgroundLight,
           foregroundColor: primary,
