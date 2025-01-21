@@ -19,7 +19,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.sizeOf(context).height;
     var textTheme = Theme.of(context)!.textTheme;
     return Scaffold(
       body: SafeArea(
