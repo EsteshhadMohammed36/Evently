@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 import 'package:event_planning/app_theme.dart';
-=======
->>>>>>> origin/feature/auth
 import 'package:flutter/material.dart';
 
 class CustomElevatedButton extends StatelessWidget {
@@ -24,13 +21,9 @@ class CustomElevatedButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 24.0),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-<<<<<<< HEAD
             side: BorderSide(color: AppTheme.primary),
             foregroundColor: foregroundColor,
             backgroundColor: backgroundColor),
-=======
-            foregroundColor: foregroundColor, backgroundColor: backgroundColor),
->>>>>>> origin/feature/auth
         onPressed: onPressed,
         child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           isGoogle
