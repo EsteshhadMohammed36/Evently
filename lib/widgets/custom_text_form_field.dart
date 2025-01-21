@@ -2,13 +2,16 @@ import 'package:event_planning/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatefulWidget {
-  CustomTextFormField(
-      {required this.prefixIconPath,
-      required this.controller,
-      this.validator,
-      required this.hintText,
-      this.isPassword = false});
+  CustomTextFormField({
+    required this.prefixIconPath,
+    required this.controller,
+    this.validator,
+    required this.hintText,
+    this.isPassword = false,
+    this.maxLines = 1,
+  });
 
+  int maxLines;
   String? prefixIconPath;
   String hintText;
   bool isPassword;
@@ -28,6 +31,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     return Padding(
         padding: EdgeInsets.symmetric(vertical: 8.0),
         child: TextFormField(
+          maxLines: widget.maxLines,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           obscureText: isObsecure,
           validator: widget.validator,
