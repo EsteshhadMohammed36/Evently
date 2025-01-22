@@ -54,6 +54,8 @@ class _HomeHeaderState extends State<HomeHeader> {
                     },
                     tabs: Category.categories
                         .map((category) => TabItem(
+                            backgroundSelected: AppTheme.backgroundLight,
+                            background: Colors.transparent,
                             isSelected: selectedIndex ==
                                 Category.categories.indexOf(category),
                             category: category))

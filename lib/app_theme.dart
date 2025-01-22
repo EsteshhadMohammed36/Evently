@@ -38,6 +38,7 @@ class AppTheme {
       appBarTheme: AppBarTheme(
           backgroundColor: backgroundLight,
           foregroundColor: primary,
+          titleTextStyle: TextStyle(color: primary, fontSize: 22),
           centerTitle: true),
       textTheme: TextTheme(
         bodyLarge:
@@ -53,6 +54,13 @@ class AppTheme {
         displayMedium: TextStyle(
             color: blackColor, fontSize: 16, fontWeight: FontWeight.bold),
       ),
+      datePickerTheme: DatePickerThemeData(
+          dayBackgroundColor: MaterialStateProperty.resolveWith((states) {
+        if (states.contains(MaterialState.selected)) {
+          return primary;
+        }
+        return Colors.transparent;
+      })),
       inputDecorationTheme: InputDecorationTheme(
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: greyColor),

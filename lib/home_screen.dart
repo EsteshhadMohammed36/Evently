@@ -1,4 +1,5 @@
 import 'package:event_planning/bottom_nav_bar_item.dart';
+import 'package:event_planning/create_event.dart';
 import 'package:event_planning/home/home_tab.dart';
 import 'package:event_planning/love/love_tab.dart';
 import 'package:event_planning/map/map_tab.dart';
@@ -25,7 +26,9 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, CreateEvent.routeName);
+        },
         child: Icon(
           Icons.add,
           size: 30,

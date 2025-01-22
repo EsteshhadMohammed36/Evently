@@ -1,5 +1,6 @@
 import 'package:event_planning/auth/screens/login_screen.dart';
 import 'package:event_planning/auth/screens/register_screen.dart';
+import 'package:event_planning/create_event.dart';
 import 'package:event_planning/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         LoginScreen.routeName: (context) => LoginScreen(),
         RegisterScreen.routeName: (context) => RegisterScreen(),
         HomeScreen.routeName: (context) => HomeScreen(),
+        CreateEvent.routeName: (context) => CreateEvent(),
       },
       initialRoute: HomeScreen.routeName,
       theme: AppTheme.light,
