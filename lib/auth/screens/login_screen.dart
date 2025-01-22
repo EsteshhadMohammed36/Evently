@@ -1,8 +1,8 @@
 import 'package:event_planning/app_theme.dart';
 import 'package:event_planning/auth/screens/register_screen.dart';
-import 'package:event_planning/auth/widgets/custom_elevated_button.dart';
-import 'package:event_planning/auth/widgets/custom_text_form_field.dart';
-import 'package:event_planning/auth/widgets/evently_logo.dart';
+import 'package:event_planning/widgets/custom_elevated_button.dart';
+import 'package:event_planning/widgets/custom_text_form_field.dart';
+import 'package:event_planning/widgets/evently_logo.dart';
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -21,7 +21,6 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context)!.textTheme;
     return Scaffold(
-      backgroundColor: AppTheme.white,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -87,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () {},
                     text: "Login With Google",
                     isGoogle: true,
-                    backgroundColor: AppTheme.white,
+                    backgroundColor: AppTheme.backgroundLight,
                     foregroundColor: AppTheme.primary,
                   )
                 ],

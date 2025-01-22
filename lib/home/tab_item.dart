@@ -5,16 +5,25 @@ import 'package:flutter/material.dart';
 class TabItem extends StatelessWidget {
   Category category;
   bool isSelected = false;
+  Color backgroundSelected;
+  Color background;
 
-  TabItem({required this.category, required this.isSelected});
+  TabItem({
+    required this.category,
+    required this.isSelected,
+    required this.backgroundSelected,
+    required this.background,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: isSelected ? AppTheme.white : Colors.transparent,
-        border: Border.all(color: AppTheme.white, width: 1),
+        color: isSelected ? backgroundSelected : background,
+        border: Border.all(
+            color: !isSelected ? AppTheme.backgroundLight : AppTheme.primary,
+            width: 1),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
@@ -22,7 +31,7 @@ class TabItem extends StatelessWidget {
           Icon(
             category.icon,
             size: 25,
-            color: isSelected ? AppTheme.primary : AppTheme.white,
+            color: isSelected ? AppTheme.primary : AppTheme.backgroundLight,
           ),
           SizedBox(
             width: 8,
