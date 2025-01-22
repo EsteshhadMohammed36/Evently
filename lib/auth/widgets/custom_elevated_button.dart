@@ -1,3 +1,4 @@
+import 'package:event_planning/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class CustomElevatedButton extends StatelessWidget {
@@ -20,7 +21,9 @@ class CustomElevatedButton extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 24.0),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            foregroundColor: foregroundColor, backgroundColor: backgroundColor),
+            side: BorderSide(color: AppTheme.primary),
+            foregroundColor: foregroundColor,
+            backgroundColor: backgroundColor),
         onPressed: onPressed,
         child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           isGoogle
