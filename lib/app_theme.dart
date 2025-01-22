@@ -40,12 +40,19 @@ class AppTheme {
           foregroundColor: primary,
           centerTitle: true),
       textTheme: TextTheme(
-          bodyLarge: TextStyle(
-              color: white, fontSize: 20, fontWeight: FontWeight.w500),
-          bodyMedium: TextStyle(
-              color: primary, fontSize: 16, fontWeight: FontWeight.bold),
-          bodySmall: TextStyle(
-              color: greyColor, fontSize: 16, fontWeight: FontWeight.w500)),
+        bodyLarge:
+            TextStyle(color: white, fontSize: 20, fontWeight: FontWeight.w500),
+        bodyMedium: TextStyle(
+            color: primary, fontSize: 16, fontWeight: FontWeight.bold),
+        bodySmall: TextStyle(
+            color: greyColor, fontSize: 16, fontWeight: FontWeight.w500),
+        displayLarge:
+            TextStyle(color: white, fontSize: 24, fontWeight: FontWeight.bold),
+        displaySmall:
+            TextStyle(color: white, fontSize: 14, fontWeight: FontWeight.w400),
+        displayMedium: TextStyle(
+            color: blackColor, fontSize: 16, fontWeight: FontWeight.bold),
+      ),
       inputDecorationTheme: InputDecorationTheme(
           enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(color: greyColor),
