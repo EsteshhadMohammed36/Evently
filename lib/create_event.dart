@@ -20,6 +20,7 @@ class CreateEvent extends StatefulWidget {
 class _CreateEventState extends State<CreateEvent> {
   TextEditingController titleController = TextEditingController();
   TextEditingController descriptionController = TextEditingController();
+  var formKey = GlobalKey<FormState>();
   int selectedIndex = 0;
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
@@ -66,80 +67,83 @@ class _CreateEventState extends State<CreateEvent> {
                       .toList())),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  "Title",
-                  style:
-                      textTheme.bodySmall!.copyWith(color: AppTheme.blackColor),
-                ),
-                CustomTextFormField(
-                  prefixIconPath: "assets/images/title_icon.png",
-                  controller: titleController,
-                  hintText: "Event Title",
-                  validator: (value) {
-                    if (value == null || value.isEmpty)
-                      return "Title can not be empty";
-                    return null;
-                  },
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Text(
-                  "Description",
-                  style:
-                      textTheme.bodySmall!.copyWith(color: AppTheme.blackColor),
-                ),
-                CustomTextFormField(
-                  prefixIconPath: null,
-                  controller: descriptionController,
-                  maxLines: 5,
-                  hintText: "Event Description",
-                  validator: (value) {
-                    if (value == null || value.isEmpty)
-                      return "Description can not be empty";
-                    return null;
-                  },
-                ),
-                CustomEventRow(
-                  image: "assets/images/event_date.png",
-                  event: "Event Date",
-                  choice: selectedDate == null
-                      ? "Choose Date"
-                      : dateFormat.format(selectedDate!),
-                  choiceTap: () async {
-                    DateTime? date = await showDatePicker(
-                        initialDate: selectedDate,
-                        initialEntryMode: DatePickerEntryMode.calendarOnly,
-                        context: context,
-                        firstDate: DateTime.now(),
-                        lastDate: DateTime.now().add(Duration(days: 365)));
-                    if (date != null) {
-                      selectedDate = date;
-                      setState(() {});
-                    }
-                  },
-                ),
-                CustomEventRow(
-                  choiceTap: () async {
-                    TimeOfDay? time = await showTimePicker(
-                        initialEntryMode: TimePickerEntryMode.dialOnly,
-                        context: context,
-                        initialTime: selectedTime!);
-                    if (time != null) {
-                      selectedTime = time;
-                      setState(() {});
-                    }
-                  },
-                  image: "assets/images/event_time.png",
-                  event: "Event Time",
-                  choice: selectedTime == null
-                      ? "Choose Time"
-                      : selectedTime!.format(context),
-                ),
-              ],
+            child: Form(
+              key: formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    "Title",
+                    style: textTheme.bodySmall!
+                        .copyWith(color: AppTheme.blackColor),
+                  ),
+                  CustomTextFormField(
+                    prefixIconPath: "assets/images/title_icon.png",
+                    controller: titleController,
+                    hintText: "Event Title",
+                    validator: (value) {
+                      if (value == null || value.isEmpty)
+                        return "Title can not be empty";
+                      return null;
+                    },
+                  ),
+                  SizedBox(
+                    height: 16,
+                  ),
+                  Text(
+                    "Description",
+                    style: textTheme.bodySmall!
+                        .copyWith(color: AppTheme.blackColor),
+                  ),
+                  CustomTextFormField(
+                    prefixIconPath: null,
+                    controller: descriptionController,
+                    maxLines: 5,
+                    hintText: "Event Description",
+                    validator: (value) {
+                      if (value == null || value.isEmpty)
+                        return "Description can not be empty";
+                      return null;
+                    },
+                  ),
+                  CustomEventRow(
+                    image: "assets/images/event_date.png",
+                    event: "Event Date",
+                    choice: selectedDate == null
+                        ? "Choose Date"
+                        : dateFormat.format(selectedDate!),
+                    choiceTap: () async {
+                      DateTime? date = await showDatePicker(
+                          initialDate: selectedDate,
+                          initialEntryMode: DatePickerEntryMode.calendarOnly,
+                          context: context,
+                          firstDate: DateTime.now(),
+                          lastDate: DateTime.now().add(Duration(days: 365)));
+                      if (date != null) {
+                        selectedDate = date;
+                        setState(() {});
+                      }
+                    },
+                  ),
+                  CustomEventRow(
+                    choiceTap: () async {
+                      TimeOfDay? time = await showTimePicker(
+                          initialEntryMode: TimePickerEntryMode.dialOnly,
+                          context: context,
+                          initialTime: selectedTime!);
+                      if (time != null) {
+                        selectedTime = time;
+                        setState(() {});
+                      }
+                    },
+                    image: "assets/images/event_time.png",
+                    event: "Event Time",
+                    choice: selectedTime == null
+                        ? "Choose Time"
+                        : selectedTime!.format(context),
+                  ),
+                ],
+              ),
             ),
           ),
           Spacer(),
@@ -153,5 +157,9 @@ class _CreateEventState extends State<CreateEvent> {
     );
   }
 
-  void onEventPressed() {}
+  void onEventPressed() {
+    if (formKey.currentState!.validate() &&
+        selectedDate != null &&
+        selectedTime != null) {}
+  }
 }
