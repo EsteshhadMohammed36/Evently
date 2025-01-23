@@ -36,7 +36,7 @@ class _CreateEventState extends State<CreateEvent> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16),
               child: Image.asset(
@@ -51,7 +51,8 @@ class _CreateEventState extends State<CreateEvent> {
                   dividerColor: Colors.transparent,
                   indicatorColor: Colors.transparent,
                   indicatorSize: TabBarIndicatorSize.label,
-                  labelPadding: EdgeInsets.only(left: 5, right: 5, bottom: 16),
+                  labelPadding:
+                      EdgeInsets.only(left: 5, right: 5, bottom: 16, top: 16),
                   isScrollable: true,
                   onTap: (index) {
                     selectedIndex = index;
@@ -65,88 +66,95 @@ class _CreateEventState extends State<CreateEvent> {
                               Category.categories.indexOf(category)),
                           category: category))
                       .toList())),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: Form(
-              key: formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Text(
-                    "Title",
-                    style: textTheme.bodySmall!
-                        .copyWith(color: AppTheme.blackColor),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Form(
+                key: formKey,
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        "Title",
+                        style: textTheme.bodySmall!
+                            .copyWith(color: AppTheme.blackColor),
+                      ),
+                      CustomTextFormField(
+                        prefixIconPath: "assets/images/title_icon.png",
+                        controller: titleController,
+                        hintText: "Event Title",
+                        validator: (value) {
+                          if (value == null || value.isEmpty)
+                            return "Title can not be empty";
+                          return null;
+                        },
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Text(
+                        "Description",
+                        style: textTheme.bodySmall!
+                            .copyWith(color: AppTheme.blackColor),
+                      ),
+                      CustomTextFormField(
+                        prefixIconPath: null,
+                        controller: descriptionController,
+                        maxLines: 5,
+                        hintText: "Event Description",
+                        validator: (value) {
+                          if (value == null || value.isEmpty)
+                            return "Description can not be empty";
+                          return null;
+                        },
+                      ),
+                      CustomEventRow(
+                        image: "assets/images/event_date.png",
+                        event: "Event Date",
+                        choice: selectedDate == null
+                            ? "Choose Date"
+                            : dateFormat.format(selectedDate!),
+                        choiceTap: () async {
+                          DateTime? date = await showDatePicker(
+                              initialDate: selectedDate,
+                              initialEntryMode:
+                                  DatePickerEntryMode.calendarOnly,
+                              context: context,
+                              firstDate: DateTime.now(),
+                              lastDate:
+                                  DateTime.now().add(Duration(days: 365)));
+                          if (date != null) {
+                            selectedDate = date;
+                            setState(() {});
+                          }
+                        },
+                      ),
+                      CustomEventRow(
+                        event: "Event Time",
+                        choice: selectedTime == null
+                            ? "Choose Time"
+                            : "${selectedTime!.format(context)}",
+                        image: "assets/images/event_time.png",
+                        choiceTap: () async {
+                          TimeOfDay? time = await showTimePicker(
+                              initialEntryMode: TimePickerEntryMode.dialOnly,
+                              context: context,
+                              initialTime: selectedTime == null
+                                  ? TimeOfDay.now()
+                                  : selectedTime!);
+                          if (time != null) {
+                            selectedTime = time;
+                            setState(() {});
+                          }
+                        },
+                      )
+                    ],
                   ),
-                  CustomTextFormField(
-                    prefixIconPath: "assets/images/title_icon.png",
-                    controller: titleController,
-                    hintText: "Event Title",
-                    validator: (value) {
-                      if (value == null || value.isEmpty)
-                        return "Title can not be empty";
-                      return null;
-                    },
-                  ),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  Text(
-                    "Description",
-                    style: textTheme.bodySmall!
-                        .copyWith(color: AppTheme.blackColor),
-                  ),
-                  CustomTextFormField(
-                    prefixIconPath: null,
-                    controller: descriptionController,
-                    maxLines: 5,
-                    hintText: "Event Description",
-                    validator: (value) {
-                      if (value == null || value.isEmpty)
-                        return "Description can not be empty";
-                      return null;
-                    },
-                  ),
-                  CustomEventRow(
-                    image: "assets/images/event_date.png",
-                    event: "Event Date",
-                    choice: selectedDate == null
-                        ? "Choose Date"
-                        : dateFormat.format(selectedDate!),
-                    choiceTap: () async {
-                      DateTime? date = await showDatePicker(
-                          initialDate: selectedDate,
-                          initialEntryMode: DatePickerEntryMode.calendarOnly,
-                          context: context,
-                          firstDate: DateTime.now(),
-                          lastDate: DateTime.now().add(Duration(days: 365)));
-                      if (date != null) {
-                        selectedDate = date;
-                        setState(() {});
-                      }
-                    },
-                  ),
-                  CustomEventRow(
-                    choiceTap: () async {
-                      TimeOfDay? time = await showTimePicker(
-                          initialEntryMode: TimePickerEntryMode.dialOnly,
-                          context: context,
-                          initialTime: selectedTime!);
-                      if (time != null) {
-                        selectedTime = time;
-                        setState(() {});
-                      }
-                    },
-                    image: "assets/images/event_time.png",
-                    event: "Event Time",
-                    choice: selectedTime == null
-                        ? "Choose Time"
-                        : selectedTime!.format(context),
-                  ),
-                ],
+                ),
               ),
             ),
           ),
-          Spacer(),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: CustomElevatedButton(

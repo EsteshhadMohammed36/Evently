@@ -58,7 +58,7 @@ class _EventItemState extends State<EventItem> {
                     Expanded(
                       flex: 9,
                       child: Text(
-                        (Category.categories[widget.index].text),
+                        ("Meeting for Updating The Development Method "),
                         style: textTheme.displayMedium,
                       ),
                     ),

@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 
 class TabItem extends StatelessWidget {
   Category category;
-  bool isSelected = false;
+  bool isSelected;
   Color backgroundSelected;
   Color background;
 
   TabItem({
     required this.category,
-    required this.isSelected,
+    this.isSelected = false,
     required this.backgroundSelected,
     required this.background,
   });
