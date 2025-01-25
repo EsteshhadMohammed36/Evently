@@ -39,7 +39,7 @@ class _HomeHeaderState extends State<HomeHeader> {
               style: textTheme.displayLarge,
             ),
             DefaultTabController(
-                length: Category.categories.length,
+                length: Category.categories.length + 1,
                 child: TabBar(
                     tabAlignment: TabAlignment.start,
                     padding: EdgeInsets.zero,
@@ -52,12 +52,22 @@ class _HomeHeaderState extends State<HomeHeader> {
                       selectedIndex = index;
                       setState(() {});
                     },
-                    tabs: Category.categories
-                        .map((category) => TabItem(
-                            isSelected: selectedIndex ==
-                                Category.categories.indexOf(category),
-                            category: category))
-                        .toList()))
+                    tabs: [
+                      TabItem(
+                          category: Category(
+                              id: "0", name: "All", icon: Icons.all_out),
+                          backgroundSelected: AppTheme.backgroundLight,
+                          isSelected: selectedIndex == 0,
+                          background: Colors.transparent),
+                      ...Category.categories
+                          .map((category) => TabItem(
+                              backgroundSelected: AppTheme.backgroundLight,
+                              background: Colors.transparent,
+                              isSelected: selectedIndex ==
+                                  Category.categories.indexOf(category) + 1,
+                              category: category))
+                          .toList()
+                    ]))
           ],
         ),
       ),

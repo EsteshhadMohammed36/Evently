@@ -42,7 +42,7 @@ class _EventItemState extends State<EventItem> {
               height: height * 0.06,
               width: MediaQuery.sizeOf(context).width * 0.12,
               decoration: BoxDecoration(
-                  color: AppTheme.white,
+                  color: AppTheme.backgroundLight,
                   borderRadius: BorderRadius.circular(8)),
             ),
             Spacer(),
@@ -50,7 +50,7 @@ class _EventItemState extends State<EventItem> {
                 margin: EdgeInsets.all(8),
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                 decoration: BoxDecoration(
-                    color: AppTheme.white,
+                    color: AppTheme.backgroundLight,
                     borderRadius: BorderRadius.circular(8)),
                 width: double.infinity,
                 child: Row(
@@ -58,7 +58,7 @@ class _EventItemState extends State<EventItem> {
                     Expanded(
                       flex: 9,
                       child: Text(
-                        (Category.categories[widget.index].text),
+                        ("Meeting for Updating The Development Method "),
                         style: textTheme.displayMedium,
                       ),
                     ),

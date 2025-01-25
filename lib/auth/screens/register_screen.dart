@@ -1,8 +1,8 @@
 import 'package:event_planning/app_theme.dart';
 import 'package:event_planning/auth/screens/login_screen.dart';
-import 'package:event_planning/auth/widgets/custom_elevated_button.dart';
-import 'package:event_planning/auth/widgets/custom_text_form_field.dart';
-import 'package:event_planning/auth/widgets/evently_logo.dart';
+import 'package:event_planning/widgets/custom_elevated_button.dart';
+import 'package:event_planning/widgets/custom_text_form_field.dart';
+import 'package:event_planning/widgets/evently_logo.dart';
 import 'package:flutter/material.dart';
 
 class RegisterScreen extends StatefulWidget {

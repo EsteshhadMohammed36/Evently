@@ -31,7 +31,8 @@ class ProfileHeader extends StatelessWidget {
               ),
               Text(
                 "Shsh362001@gmail.com",
-                style: textTheme.bodySmall!.copyWith(color: AppTheme.white),
+                style: textTheme.bodySmall!
+                    .copyWith(color: AppTheme.backgroundLight),
               )
             ],
           )

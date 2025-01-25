@@ -44,7 +44,7 @@ class ProfileTab extends StatelessWidget {
             children: [
               Icon(
                 Icons.logout,
-                color: AppTheme.white,
+                color: AppTheme.backgroundLight,
               ),
               SizedBox(
                 width: 8,
