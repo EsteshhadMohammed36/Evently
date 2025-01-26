@@ -178,8 +178,12 @@ class _CreateEventState extends State<CreateEvent> {
           title: titleController.text,
           description: descriptionController.text,
           dateTime: dateTime);
-      FirebaseService.addToFirestore(event);
-      Navigator.pop(context);
+      FirebaseService.addToFirestore(event).then((_) {
+        Navigator.pop(context);
+        print("Event created");
+      }).catchError(() {
+        print("Failed");
+      });
     }
   }
 }
