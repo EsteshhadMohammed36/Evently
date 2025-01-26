@@ -1,6 +1,8 @@
 import 'package:event_planning/app_theme.dart';
-import 'package:event_planning/home/category.dart';
+import 'package:event_planning/firebase_sevice.dart';
 import 'package:event_planning/home/tab_item.dart';
+import 'package:event_planning/models/category.dart';
+import 'package:event_planning/models/event.dart';
 import 'package:event_planning/widgets/custom_event_row.dart';
 import 'package:event_planning/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -168,6 +170,20 @@ class _CreateEventState extends State<CreateEvent> {
   void onEventPressed() {
     if (formKey.currentState!.validate() &&
         selectedDate != null &&
-        selectedTime != null) {}
+        selectedTime != null) {
+      DateTime dateTime = DateTime(selectedDate!.year, selectedDate!.month,
+          selectedDate!.day, selectedTime!.hour, selectedTime!.minute);
+      Event event = Event(
+          category: Category.categories[selectedIndex],
+          title: titleController.text,
+          description: descriptionController.text,
+          dateTime: dateTime);
+      FirebaseService.addToFirestore(event).then((_) {
+        Navigator.pop(context);
+        print("Event created");
+      }).catchError(() {
+        print("Failed");
+      });
+    }
   }
 }
