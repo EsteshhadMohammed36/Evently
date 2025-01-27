@@ -1,6 +1,7 @@
+import 'package:event_planning/firebase_sevice.dart';
 import 'package:event_planning/home/event_item.dart';
 import 'package:event_planning/home/home_header.dart';
-import 'package:event_planning/models/category.dart';
+import 'package:event_planning/models/event.dart';
 import 'package:flutter/material.dart';
 
 class HomeTab extends StatefulWidget {
@@ -9,8 +10,11 @@ class HomeTab extends StatefulWidget {
 }
 
 class _HomeTabState extends State<HomeTab> {
+  List<Event> events = [];
+
   @override
   Widget build(BuildContext context) {
+    if (events.isEmpty) getEvents();
     return SafeArea(
       child: Scaffold(
           body: Column(
@@ -20,13 +24,23 @@ class _HomeTabState extends State<HomeTab> {
               child: ListView.builder(
             itemBuilder: (context, index) {
               return EventItem(
-                index: index,
+                event: events[index],
               );
             },
-            itemCount: Category.categories.length,
+            itemCount: events.length,
           ))
         ],
       )),
     );
+  }
+
+  getEvents() async {
+    events = await FirebaseService.getEventsFromFirestore();
+    events.sort(
+      (event, nextEvent) {
+        return event.dateTime.compareTo(nextEvent.dateTime);
+      },
+    );
+    setState(() {});
   }
 }
