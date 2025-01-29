@@ -43,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: BottomNavigationBar(
           elevation: 0,
           onTap: (value) {
+            if (selectedIndex == value) return;
             selectedIndex = value;
             setState(() {});
           },
