@@ -1,7 +1,9 @@
 import 'package:event_planning/app_theme.dart';
 import 'package:event_planning/home/tab_item.dart';
 import 'package:event_planning/models/category.dart';
+import 'package:event_planning/providers/events_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomeHeader extends StatefulWidget {
   const HomeHeader({super.key});
@@ -15,6 +17,7 @@ class _HomeHeaderState extends State<HomeHeader> {
 
   @override
   Widget build(BuildContext context) {
+    EventsProvider eventsProvider = Provider.of<EventsProvider>(context);
     var textTheme = Theme.of(context).textTheme;
     return Container(
       width: double.infinity,
@@ -49,8 +52,12 @@ class _HomeHeaderState extends State<HomeHeader> {
                     labelPadding: EdgeInsets.only(left: 8, right: 8, top: 16),
                     isScrollable: true,
                     onTap: (index) {
+                      if (selectedIndex == index) return;
                       selectedIndex = index;
-                      setState(() {});
+                      index == 0
+                          ? eventsProvider.filterEvents(null)
+                          : eventsProvider
+                              .filterEvents(Category.categories[index - 1]);
                     },
                     tabs: [
                       TabItem(

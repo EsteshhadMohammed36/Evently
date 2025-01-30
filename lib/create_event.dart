@@ -3,10 +3,12 @@ import 'package:event_planning/firebase_sevice.dart';
 import 'package:event_planning/home/tab_item.dart';
 import 'package:event_planning/models/category.dart';
 import 'package:event_planning/models/event.dart';
+import 'package:event_planning/providers/events_provider.dart';
 import 'package:event_planning/widgets/custom_event_row.dart';
 import 'package:event_planning/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import 'widgets/custom_elevated_button.dart';
 
@@ -160,14 +162,14 @@ class _CreateEventState extends State<CreateEvent> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: CustomElevatedButton(
-                onPressed: onEventPressed, text: "Add Event"),
+                onPressed: createEvents, text: "Add Event"),
           )
         ],
       ),
     );
   }
 
-  void onEventPressed() {
+  void createEvents() {
     if (formKey.currentState!.validate() &&
         selectedDate != null &&
         selectedTime != null) {
@@ -179,6 +181,7 @@ class _CreateEventState extends State<CreateEvent> {
           description: descriptionController.text,
           dateTime: dateTime);
       FirebaseService.addEventsToFirestore(event).then((_) {
+        Provider.of<EventsProvider>(context, listen: false).getEvents();
         Navigator.pop(context);
         print("Event created");
       }).catchError(() {
