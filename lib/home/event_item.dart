@@ -1,11 +1,14 @@
 import 'package:event_planning/app_theme.dart';
-import 'package:event_planning/models/category.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+
+import '../models/event.dart';
 
 class EventItem extends StatefulWidget {
-  int index;
+  //int index;
+  Event event;
 
-  EventItem({required this.index});
+  EventItem({required this.event});
 
   @override
   State<EventItem> createState() => _EventItemState();
@@ -25,7 +28,7 @@ class _EventItemState extends State<EventItem> {
             borderRadius: BorderRadius.circular(16),
             image: DecorationImage(
               image: AssetImage(
-                  "assets/tabs/${Category.categories[widget.index].imageName}.png"),
+                  "assets/tabs/${widget.event.category.imageName}.png"),
               fit: BoxFit.fill,
             )),
         child: Column(
@@ -34,7 +37,8 @@ class _EventItemState extends State<EventItem> {
             Container(
               child: Center(
                 child: Text(
-                  " 21\nNov",
+                  " ${widget.event.dateTime.day}\n" +
+                      DateFormat("MMM").format(widget.event.dateTime),
                   style: textTheme.bodyMedium!.copyWith(fontSize: 20),
                 ),
               ),
@@ -58,7 +62,7 @@ class _EventItemState extends State<EventItem> {
                     Expanded(
                       flex: 9,
                       child: Text(
-                        ("Meeting for Updating The Development Method "),
+                        (widget.event.title),
                         style: textTheme.displayMedium,
                       ),
                     ),
