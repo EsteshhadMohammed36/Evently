@@ -2,11 +2,11 @@ import 'package:event_planning/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../models/event.dart';
+import '../models/event_model.dart';
 
 class EventItem extends StatefulWidget {
   //int index;
-  Event event;
+  EventModel event;
 
   EventItem({required this.event});
 

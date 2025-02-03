@@ -1,5 +1,7 @@
 import 'package:event_planning/app_theme.dart';
 import 'package:event_planning/auth/screens/register_screen.dart';
+import 'package:event_planning/firebase_sevice.dart';
+import 'package:event_planning/home_screen.dart';
 import 'package:event_planning/widgets/custom_elevated_button.dart';
 import 'package:event_planning/widgets/custom_text_form_field.dart';
 import 'package:event_planning/widgets/evently_logo.dart';
@@ -100,7 +102,11 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void login() {
     if (formKey.currentState!.validate()) {
-      //login logic
+      FirebaseService.login(
+              email: emailController.text, password: passwordController.text)
+          .then((_) =>
+              Navigator.pushReplacementNamed(context, HomeScreen.routeName))
+          .catchError((error) => print(error));
     }
   }
 }

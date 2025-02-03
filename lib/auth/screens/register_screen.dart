@@ -1,5 +1,7 @@
 import 'package:event_planning/app_theme.dart';
 import 'package:event_planning/auth/screens/login_screen.dart';
+import 'package:event_planning/firebase_sevice.dart';
+import 'package:event_planning/home_screen.dart';
 import 'package:event_planning/widgets/custom_elevated_button.dart';
 import 'package:event_planning/widgets/custom_text_form_field.dart';
 import 'package:event_planning/widgets/evently_logo.dart';
@@ -15,7 +17,7 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController NameController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
   var formKey = GlobalKey<FormState>();
 
   @override
@@ -36,7 +38,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   EventlyLogo(),
                   CustomTextFormField(
                     hintText: "Name",
-                    controller: NameController,
+                    controller: nameController,
                     prefixIconPath: "assets/images/profile_icon.png",
                   ),
                   CustomTextFormField(
@@ -91,7 +93,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   void createAccount() {
     if (formKey.currentState!.validate()) {
-      //login logic
+      FirebaseService.register(
+              name: nameController.text,
+              email: emailController.text,
+              password: passwordController.text)
+          .then((_) =>
+              Navigator.pushReplacementNamed(context, HomeScreen.routeName))
+          .catchError((error) => print(error));
     }
   }
 }
