@@ -3,6 +3,7 @@ import 'package:event_planning/auth/screens/register_screen.dart';
 import 'package:event_planning/create_event.dart';
 import 'package:event_planning/home_screen.dart';
 import 'package:event_planning/providers/events_provider.dart';
+import 'package:event_planning/providers/user_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,8 +13,10 @@ import 'app_theme.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(
-      ChangeNotifierProvider(create: (_) => EventsProvider(), child: MyApp()));
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) => EventsProvider()),
+    ChangeNotifierProvider(create: (_) => UserProvider()),
+  ], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -30,7 +33,7 @@ class MyApp extends StatelessWidget {
         HomeScreen.routeName: (context) => HomeScreen(),
         CreateEvent.routeName: (context) => CreateEvent(),
       },
-      initialRoute: HomeScreen.routeName,
+      initialRoute: LoginScreen.routeName,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
       themeMode: ThemeMode.light,

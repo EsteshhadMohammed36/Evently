@@ -1,4 +1,6 @@
 import 'package:event_planning/app_theme.dart';
+import 'package:event_planning/auth/screens/login_screen.dart';
+import 'package:event_planning/firebase_sevice.dart';
 import 'package:event_planning/profile/custom_container.dart';
 import 'package:event_planning/profile/profile_header.dart';
 import 'package:flutter/material.dart';
@@ -40,20 +42,26 @@ class ProfileTab extends StatelessWidget {
             color: AppTheme.redColor,
             borderRadius: BorderRadius.circular(16),
           ),
-          child: Row(
-            children: [
-              Icon(
-                Icons.logout,
-                color: AppTheme.backgroundLight,
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Text(
-                "Logout",
-                style: textTheme.bodyLarge,
-              )
-            ],
+          child: InkWell(
+            onTap: () {
+              FirebaseService.signOut();
+              Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+            },
+            child: Row(
+              children: [
+                Icon(
+                  Icons.logout,
+                  color: AppTheme.backgroundLight,
+                ),
+                SizedBox(
+                  width: 8,
+                ),
+                Text(
+                  "Logout",
+                  style: textTheme.bodyLarge,
+                )
+              ],
+            ),
           ),
         )
       ],

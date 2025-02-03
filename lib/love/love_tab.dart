@@ -1,5 +1,5 @@
 import 'package:event_planning/app_theme.dart';
-import 'package:event_planning/models/category.dart';
+import 'package:event_planning/models/category_model.dart';
 import 'package:flutter/material.dart';
 
 class LoveTab extends StatefulWidget {
@@ -40,7 +40,7 @@ class _LoveTabState extends State<LoveTab> {
           itemBuilder: (context, index) {
             return Container();
           },
-          itemCount: Category.categories.length,
+          itemCount: CategoryModel.categories.length,
         ))
       ],
     );

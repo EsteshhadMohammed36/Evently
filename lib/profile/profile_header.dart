@@ -1,5 +1,8 @@
 import 'package:event_planning/app_theme.dart';
+import 'package:event_planning/models/user_model.dart';
+import 'package:event_planning/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProfileHeader extends StatelessWidget {
   const ProfileHeader({super.key});
@@ -8,6 +11,7 @@ class ProfileHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var textTheme = Theme.of(context).textTheme;
+    UserModel user = Provider.of<UserProvider>(context).currentUser!;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16),
       height: height * 0.2,
@@ -26,11 +30,11 @@ class ProfileHeader extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Esteshhad Mohammed",
+                user.name,
                 style: textTheme.displayLarge,
               ),
               Text(
-                "Shsh362001@gmail.com",
+                user.email,
                 style: textTheme.bodySmall!
                     .copyWith(color: AppTheme.backgroundLight),
               )
