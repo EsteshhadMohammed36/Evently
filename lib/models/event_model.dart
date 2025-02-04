@@ -1,27 +1,27 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:event_planning/models/category.dart';
+import 'package:event_planning/models/category_model.dart';
 
-class Event {
+class EventModel {
   String id;
   String title;
   String description;
   DateTime dateTime;
-  Category category;
+  CategoryModel category;
 
-  Event(
+  EventModel(
       {this.id = '',
       required this.title,
       required this.description,
       required this.dateTime,
       required this.category});
 
-  Event.fromJson(Map<String, dynamic> json)
+  EventModel.fromJson(Map<String, dynamic> json)
       : this(
             id: json['id'],
             title: json['title'],
             description: json['description'],
             dateTime: (json['timestamp'] as Timestamp).toDate(),
-            category: Category.categories
+            category: CategoryModel.categories
                 .firstWhere((category) => json['categoryId'] == category.id));
 
   Map<String, dynamic> toJson() => {

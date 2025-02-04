@@ -1,9 +1,9 @@
 import 'package:event_planning/app_theme.dart';
-import 'package:event_planning/models/category.dart';
+import 'package:event_planning/models/category_model.dart';
 import 'package:flutter/material.dart';
 
 class TabItem extends StatelessWidget {
-  Category category;
+  CategoryModel category;
   bool isSelected;
   Color backgroundSelected;
   Color background;

@@ -1,8 +1,8 @@
 import 'package:event_planning/app_theme.dart';
 import 'package:event_planning/firebase_sevice.dart';
 import 'package:event_planning/home/tab_item.dart';
-import 'package:event_planning/models/category.dart';
-import 'package:event_planning/models/event.dart';
+import 'package:event_planning/models/category_model.dart';
+import 'package:event_planning/models/event_model.dart';
 import 'package:event_planning/providers/events_provider.dart';
 import 'package:event_planning/widgets/custom_event_row.dart';
 import 'package:event_planning/widgets/custom_text_form_field.dart';
@@ -44,11 +44,11 @@ class _CreateEventState extends State<CreateEvent> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16),
               child: Image.asset(
-                  "assets/tabs/${Category.categories[selectedIndex].imageName}.png"),
+                  "assets/tabs/${CategoryModel.categories[selectedIndex].imageName}.png"),
             ),
           ),
           DefaultTabController(
-              length: Category.categories.length,
+              length: CategoryModel.categories.length,
               child: TabBar(
                   tabAlignment: TabAlignment.start,
                   padding: const EdgeInsets.only(left: 11),
@@ -62,12 +62,12 @@ class _CreateEventState extends State<CreateEvent> {
                     selectedIndex = index;
                     setState(() {});
                   },
-                  tabs: Category.categories
+                  tabs: CategoryModel.categories
                       .map((category) => TabItem(
                           backgroundSelected: Colors.transparent,
                           background: AppTheme.primary,
                           isSelected: !(selectedIndex ==
-                              Category.categories.indexOf(category)),
+                              CategoryModel.categories.indexOf(category)),
                           category: category))
                       .toList())),
           Expanded(
@@ -175,8 +175,8 @@ class _CreateEventState extends State<CreateEvent> {
         selectedTime != null) {
       DateTime dateTime = DateTime(selectedDate!.year, selectedDate!.month,
           selectedDate!.day, selectedTime!.hour, selectedTime!.minute);
-      Event event = Event(
-          category: Category.categories[selectedIndex],
+      EventModel event = EventModel(
+          category: CategoryModel.categories[selectedIndex],
           title: titleController.text,
           description: descriptionController.text,
           dateTime: dateTime);

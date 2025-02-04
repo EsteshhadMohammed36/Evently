@@ -1,6 +1,6 @@
 import 'package:event_planning/app_theme.dart';
 import 'package:event_planning/home/tab_item.dart';
-import 'package:event_planning/models/category.dart';
+import 'package:event_planning/models/category_model.dart';
 import 'package:event_planning/providers/events_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -42,7 +42,7 @@ class _HomeHeaderState extends State<HomeHeader> {
               style: textTheme.displayLarge,
             ),
             DefaultTabController(
-                length: Category.categories.length + 1,
+                length: CategoryModel.categories.length + 1,
                 child: TabBar(
                     tabAlignment: TabAlignment.start,
                     padding: EdgeInsets.zero,
@@ -56,22 +56,23 @@ class _HomeHeaderState extends State<HomeHeader> {
                       selectedIndex = index;
                       index == 0
                           ? eventsProvider.filterEvents(null)
-                          : eventsProvider
-                              .filterEvents(Category.categories[index - 1]);
+                          : eventsProvider.filterEvents(
+                              CategoryModel.categories[index - 1]);
                     },
                     tabs: [
                       TabItem(
-                          category: Category(
+                          category: CategoryModel(
                               id: "0", name: "All", icon: Icons.all_out),
                           backgroundSelected: AppTheme.backgroundLight,
                           isSelected: selectedIndex == 0,
                           background: Colors.transparent),
-                      ...Category.categories
+                      ...CategoryModel.categories
                           .map((category) => TabItem(
                               backgroundSelected: AppTheme.backgroundLight,
                               background: Colors.transparent,
                               isSelected: selectedIndex ==
-                                  Category.categories.indexOf(category) + 1,
+                                  CategoryModel.categories.indexOf(category) +
+                                      1,
                               category: category))
                           .toList()
                     ]))
