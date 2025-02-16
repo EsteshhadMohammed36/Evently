@@ -6,18 +6,22 @@ import 'package:flutter/material.dart';
 class EventsProvider with ChangeNotifier {
   List<EventModel> allEvents = [];
   List<EventModel> filteredEvents = [];
+  List<EventModel> favoriteEvents = [];
   CategoryModel? selectedCategory;
 
   getEvents() async {
     allEvents = await FirebaseService.getEventsFromFirestore();
+    //1-sorting
     allEvents.sort(
       (event, nextEvent) {
         return event.dateTime.compareTo(nextEvent.dateTime);
       },
     );
+    //2-filtering
     filterEvents(selectedCategory);
   }
 
+  //2- change selected category
   filterEvents(CategoryModel? category) {
     selectedCategory = category;
     if (category == null)
@@ -25,6 +29,12 @@ class EventsProvider with ChangeNotifier {
     else
       filteredEvents =
           allEvents.where((event) => event.category == category).toList();
+    notifyListeners();
+  }
+
+  void filterFavorite(List<String> favEventsIds) {
+    favoriteEvents =
+        allEvents.where((event) => favEventsIds.contains(event.id)).toList();
     notifyListeners();
   }
 }

@@ -6,6 +6,8 @@ import 'package:event_planning/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../models/user_model.dart';
+
 class HomeHeader extends StatefulWidget {
   const HomeHeader({super.key});
 
@@ -18,6 +20,7 @@ class _HomeHeaderState extends State<HomeHeader> {
 
   @override
   Widget build(BuildContext context) {
+    UserModel user = Provider.of<UserProvider>(context).currentUser!;
     EventsProvider eventsProvider = Provider.of<EventsProvider>(context);
     var textTheme = Theme.of(context).textTheme;
     return Container(
@@ -39,7 +42,7 @@ class _HomeHeaderState extends State<HomeHeader> {
               style: textTheme.displaySmall,
             ),
             Text(
-              Provider.of<UserProvider>(context).currentUser!.name,
+              user.name,
               style: textTheme.displayLarge,
             ),
             DefaultTabController(
