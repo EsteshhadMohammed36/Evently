@@ -14,7 +14,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (_) => EventsProvider()),
+    ChangeNotifierProvider(create: (_) => EventsProvider()..getEvents()),
     ChangeNotifierProvider(create: (_) => UserProvider()),
   ], child: MyApp()));
 }

@@ -3,7 +3,9 @@ import 'package:event_planning/auth/screens/login_screen.dart';
 import 'package:event_planning/firebase_sevice.dart';
 import 'package:event_planning/profile/custom_container.dart';
 import 'package:event_planning/profile/profile_header.dart';
+import 'package:event_planning/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProfileTab extends StatelessWidget {
   @override
@@ -45,6 +47,8 @@ class ProfileTab extends StatelessWidget {
           child: InkWell(
             onTap: () {
               FirebaseService.signOut();
+              Provider.of<UserProvider>(context, listen: false)
+                  .updateCurrentUser(null);
               Navigator.pushReplacementNamed(context, LoginScreen.routeName);
             },
             child: Row(

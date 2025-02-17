@@ -11,7 +11,8 @@ class ProfileHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var textTheme = Theme.of(context).textTheme;
-    UserModel user = Provider.of<UserProvider>(context).currentUser!;
+    UserModel user =
+        Provider.of<UserProvider>(context, listen: false).currentUser!;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 16),
       height: height * 0.2,

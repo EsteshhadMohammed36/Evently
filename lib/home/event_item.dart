@@ -1,6 +1,9 @@
 import 'package:event_planning/app_theme.dart';
+import 'package:event_planning/providers/events_provider.dart';
+import 'package:event_planning/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 import '../models/event_model.dart';
 
@@ -15,10 +18,12 @@ class EventItem extends StatefulWidget {
 }
 
 class _EventItemState extends State<EventItem> {
-  bool isPressed = false;
-
   @override
   Widget build(BuildContext context) {
+    UserProvider userProvider = Provider.of<UserProvider>(context);
+    EventsProvider eventsProvider =
+        Provider.of<EventsProvider>(context, listen: false);
+    bool isFavorite = userProvider.checkIsFavorite(widget.event.id);
     var textTheme = Theme.of(context).textTheme;
     var height = MediaQuery.sizeOf(context).height;
     return Container(
@@ -70,13 +75,22 @@ class _EventItemState extends State<EventItem> {
                     Expanded(
                       flex: 1,
                       child: IconButton(
-                          onPressed: () {
-                            isPressed = !isPressed;
-                            setState(() {});
-                          },
-                          icon: Icon(isPressed
-                              ? Icons.favorite
-                              : Icons.favorite_border_outlined)),
+                        onPressed: () {
+                          if (isFavorite) {
+                            userProvider
+                                .removeEventfromUserFavList(widget.event.id);
+                            eventsProvider.filterFavorite(
+                                userProvider.currentUser!.favEventsIds);
+                          } else {
+                            userProvider.addEventToUserFavList(widget.event.id);
+                          }
+                          //setState(() {});
+                        },
+                        icon: Icon(isFavorite
+                            ? Icons.favorite
+                            : Icons.favorite_border_outlined),
+                        color: AppTheme.primary,
+                      ),
                     )
                   ],
                 )),
