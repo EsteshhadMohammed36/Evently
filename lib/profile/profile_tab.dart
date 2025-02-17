@@ -3,14 +3,22 @@ import 'package:event_planning/auth/screens/login_screen.dart';
 import 'package:event_planning/firebase_sevice.dart';
 import 'package:event_planning/profile/custom_container.dart';
 import 'package:event_planning/profile/profile_header.dart';
+import 'package:event_planning/providers/theming_provider.dart';
 import 'package:event_planning/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ProfileTab extends StatelessWidget {
+class ProfileTab extends StatefulWidget {
+  @override
+  State<ProfileTab> createState() => _ProfileTabState();
+}
+
+class _ProfileTabState extends State<ProfileTab> {
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
+    ThemingProvider themingProvider = Provider.of<ThemingProvider>(context);
+
     return Column(
       children: [
         ProfileHeader(),
@@ -21,17 +29,21 @@ class ProfileTab extends StatelessWidget {
             children: [
               Text(
                 "Language",
-                style: textTheme.displayMedium!.copyWith(fontSize: 20),
+                style: themingProvider.isDark
+                    ? textTheme.displayLarge!.copyWith(fontSize: 20)
+                    : textTheme.displayMedium!.copyWith(fontSize: 20),
               ),
               CustomContainer(
                 text: "Arabic",
               ),
               Text(
                 "Theme",
-                style: textTheme.displayMedium!.copyWith(fontSize: 20),
+                style: themingProvider.isDark
+                    ? textTheme.displayLarge!.copyWith(fontSize: 20)
+                    : textTheme.displayMedium!.copyWith(fontSize: 20),
               ),
               CustomContainer(
-                text: "Light",
+                text: themingProvider.getThemeName(themingProvider.theme),
               ),
             ],
           ),

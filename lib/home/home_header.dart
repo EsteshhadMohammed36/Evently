@@ -2,6 +2,7 @@ import 'package:event_planning/app_theme.dart';
 import 'package:event_planning/home/tab_item.dart';
 import 'package:event_planning/models/category_model.dart';
 import 'package:event_planning/providers/events_provider.dart';
+import 'package:event_planning/providers/theming_provider.dart';
 import 'package:event_planning/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +22,7 @@ class _HomeHeaderState extends State<HomeHeader> {
   @override
   Widget build(BuildContext context) {
     UserModel user = Provider.of<UserProvider>(context).currentUser!;
+    ThemingProvider themingProvider = Provider.of<ThemingProvider>(context);
     EventsProvider eventsProvider = Provider.of<EventsProvider>(context);
     var textTheme = Theme.of(context).textTheme;
     return Container(
@@ -30,7 +32,9 @@ class _HomeHeaderState extends State<HomeHeader> {
             bottomRight: Radius.circular(16),
             bottomLeft: Radius.circular(16),
           ),
-          color: AppTheme.primary),
+          color: themingProvider.isDark
+              ? AppTheme.backgroundDark
+              : AppTheme.primary),
       child: Padding(
         padding: EdgeInsets.only(top: 24, left: 16, bottom: 21),
         child: Column(
@@ -46,7 +50,7 @@ class _HomeHeaderState extends State<HomeHeader> {
               style: textTheme.displayLarge,
             ),
             DefaultTabController(
-                length: CategoryModel.categories.length + 1,
+                length: CategoryModel.categoriesDark.length + 1,
                 child: TabBar(
                     tabAlignment: TabAlignment.start,
                     padding: EdgeInsets.zero,
@@ -61,18 +65,22 @@ class _HomeHeaderState extends State<HomeHeader> {
                       index == 0
                           ? eventsProvider.filterEvents(null)
                           : eventsProvider.filterEvents(
-                              CategoryModel.categories[index - 1]);
+                              CategoryModel.categoriesDark[index - 1]);
                     },
                     tabs: [
                       TabItem(
                           category: CategoryModel(
                               id: "0", name: "All", icon: Icons.all_out),
-                          backgroundSelected: AppTheme.backgroundLight,
+                          backgroundSelected: themingProvider.isDark
+                              ? AppTheme.primary
+                              : AppTheme.backgroundLight,
                           isSelected: selectedIndex == 0,
                           background: Colors.transparent),
                       ...CategoryModel.categories
                           .map((category) => TabItem(
-                              backgroundSelected: AppTheme.backgroundLight,
+                              backgroundSelected: themingProvider.isDark
+                                  ? AppTheme.primary
+                                  : AppTheme.backgroundLight,
                               background: Colors.transparent,
                               isSelected: selectedIndex ==
                                   CategoryModel.categories.indexOf(category) +

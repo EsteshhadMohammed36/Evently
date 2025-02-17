@@ -4,6 +4,7 @@ import 'package:event_planning/home/tab_item.dart';
 import 'package:event_planning/models/category_model.dart';
 import 'package:event_planning/models/event_model.dart';
 import 'package:event_planning/providers/events_provider.dart';
+import 'package:event_planning/providers/theming_provider.dart';
 import 'package:event_planning/providers/user_provider.dart';
 import 'package:event_planning/widgets/custom_event_row.dart';
 import 'package:event_planning/widgets/custom_text_form_field.dart';
@@ -34,6 +35,7 @@ class _CreateEventState extends State<CreateEvent> {
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
+    ThemingProvider themingProvider = Provider.of<ThemingProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text("Create Event"),
@@ -45,11 +47,11 @@ class _CreateEventState extends State<CreateEvent> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(16),
               child: Image.asset(
-                  "assets/tabs/${CategoryModel.categories[selectedIndex].imageName}.png"),
+                  "assets/tabs/${CategoryModel.categoriesDark[selectedIndex].imageName}.png"),
             ),
           ),
           DefaultTabController(
-              length: CategoryModel.categories.length,
+              length: CategoryModel.categoriesDark.length,
               child: TabBar(
                   tabAlignment: TabAlignment.start,
                   padding: const EdgeInsets.only(left: 11),
@@ -63,12 +65,12 @@ class _CreateEventState extends State<CreateEvent> {
                     selectedIndex = index;
                     setState(() {});
                   },
-                  tabs: CategoryModel.categories
+                  tabs: CategoryModel.categoriesDark
                       .map((category) => TabItem(
                           backgroundSelected: Colors.transparent,
                           background: AppTheme.primary,
                           isSelected: !(selectedIndex ==
-                              CategoryModel.categories.indexOf(category)),
+                              CategoryModel.categoriesDark.indexOf(category)),
                           category: category))
                       .toList())),
           Expanded(
@@ -86,7 +88,9 @@ class _CreateEventState extends State<CreateEvent> {
                             .copyWith(color: AppTheme.blackColor),
                       ),
                       CustomTextFormField(
-                        prefixIconPath: "assets/images/title_icon.png",
+                        prefixIconPath: themingProvider.isDark
+                            ? "assets/images/title_dark.png"
+                            : "assets/images/title_icon.png",
                         controller: titleController,
                         hintText: "Event Title",
                         validator: (value) {
@@ -115,7 +119,9 @@ class _CreateEventState extends State<CreateEvent> {
                         },
                       ),
                       CustomEventRow(
-                        image: "assets/images/event_date.png",
+                        image: themingProvider.isDark
+                            ? "assets/images/event_date_dark.png"
+                            : "assets/images/event_date.png",
                         event: "Event Date",
                         choice: selectedDate == null
                             ? "Choose Date"
@@ -140,7 +146,9 @@ class _CreateEventState extends State<CreateEvent> {
                         choice: selectedTime == null
                             ? "Choose Time"
                             : "${selectedTime!.format(context)}",
-                        image: "assets/images/event_time.png",
+                        image: themingProvider.isDark
+                            ? "assets/images/event_time_dark.png"
+                            : "assets/images/event_time.png",
                         choiceTap: () async {
                           TimeOfDay? time = await showTimePicker(
                               initialEntryMode: TimePickerEntryMode.dialOnly,

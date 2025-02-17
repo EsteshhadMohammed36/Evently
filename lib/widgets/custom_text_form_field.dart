@@ -1,5 +1,7 @@
 import 'package:event_planning/app_theme.dart';
+import 'package:event_planning/providers/theming_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CustomTextFormField extends StatefulWidget {
   CustomTextFormField({
@@ -28,6 +30,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context)!.textTheme;
+    ThemingProvider themingProvider = Provider.of<ThemingProvider>(context);
     return Padding(
         padding: EdgeInsets.symmetric(vertical: 8.0),
         child: TextFormField(
@@ -37,9 +40,13 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           validator: widget.validator,
           controller: widget.controller,
           cursorColor: AppTheme.primary,
-          style: Theme.of(context)!.textTheme.bodySmall,
+          style: themingProvider.isDark
+              ? textTheme.bodySmall?.copyWith(color: AppTheme.white)
+              : textTheme.bodySmall,
           decoration: InputDecoration(
-            hintStyle: textTheme.bodySmall,
+            hintStyle: themingProvider.isDark
+                ? textTheme.bodySmall?.copyWith(color: AppTheme.white)
+                : textTheme.bodySmall,
             hintText: widget.hintText,
             suffixIcon: widget.isPassword
                 ? IconButton(
@@ -50,11 +57,15 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                     icon: isObsecure
                         ? Icon(
                             Icons.visibility,
-                            color: AppTheme.greyColor,
+                            color: themingProvider.isDark
+                                ? AppTheme.white
+                                : AppTheme.greyColor,
                           )
                         : Icon(
                             Icons.visibility_off,
-                            color: AppTheme.greyColor,
+                            color: themingProvider.isDark
+                                ? AppTheme.white
+                                : AppTheme.greyColor,
                           ))
                 : null,
             prefixIcon: widget.prefixIconPath == null
