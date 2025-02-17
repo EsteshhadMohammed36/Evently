@@ -4,6 +4,7 @@ import 'package:event_planning/home/tab_item.dart';
 import 'package:event_planning/models/category_model.dart';
 import 'package:event_planning/models/event_model.dart';
 import 'package:event_planning/providers/events_provider.dart';
+import 'package:event_planning/providers/user_provider.dart';
 import 'package:event_planning/widgets/custom_event_row.dart';
 import 'package:event_planning/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -176,6 +177,8 @@ class _CreateEventState extends State<CreateEvent> {
       DateTime dateTime = DateTime(selectedDate!.year, selectedDate!.month,
           selectedDate!.day, selectedTime!.hour, selectedTime!.minute);
       EventModel event = EventModel(
+          userId:
+              Provider.of<UserProvider>(context, listen: false).currentUser!.id,
           category: CategoryModel.categories[selectedIndex],
           title: titleController.text,
           description: descriptionController.text,

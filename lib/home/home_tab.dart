@@ -13,7 +13,6 @@ class _HomeTabState extends State<HomeTab> {
   @override
   Widget build(BuildContext context) {
     EventsProvider eventsProvider = Provider.of<EventsProvider>(context);
-    if (eventsProvider.filteredEvents.isEmpty) eventsProvider.getEvents();
     return SafeArea(
       child: Scaffold(
           body: Column(
