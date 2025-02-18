@@ -2,6 +2,7 @@ import 'package:event_planning/app_theme.dart';
 import 'package:event_planning/auth/screens/login_screen.dart';
 import 'package:event_planning/firebase_sevice.dart';
 import 'package:event_planning/home_screen.dart';
+import 'package:event_planning/providers/theming_provider.dart';
 import 'package:event_planning/providers/user_provider.dart';
 import 'package:event_planning/widgets/custom_elevated_button.dart';
 import 'package:event_planning/widgets/custom_text_form_field.dart';
@@ -24,7 +25,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.sizeOf(context).height;
+    ThemingProvider themingProvider = Provider.of<ThemingProvider>(context);
     var textTheme = Theme.of(context)!.textTheme;
     return Scaffold(
       body: SafeArea(
@@ -41,7 +42,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   CustomTextFormField(
                     hintText: "Name",
                     controller: nameController,
-                    prefixIconPath: "assets/images/profile_icon.png",
+                    prefixIconPath: themingProvider.isDark
+                        ? "assets/images/profile_dark.png"
+                        : "assets/images/profile_icon.png",
                   ),
                   CustomTextFormField(
                     validator: (value) {
@@ -51,7 +54,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     },
                     hintText: "Email",
                     controller: emailController,
-                    prefixIconPath: "assets/images/email_icon.png",
+                    prefixIconPath: themingProvider.isDark
+                        ? "assets/images/email_dark.png"
+                        : "assets/images/email_icon.png",
                   ),
                   CustomTextFormField(
                     validator: (value) {
@@ -62,7 +67,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     hintText: "Password",
                     isPassword: true,
                     controller: passwordController,
-                    prefixIconPath: "assets/images/password_icon.png",
+                    prefixIconPath: themingProvider.isDark
+                        ? "assets/images/password_dark.png"
+                        : "assets/images/password_icon.png",
                   ),
                   CustomElevatedButton(
                     text: "Create Account",
@@ -73,8 +80,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     children: [
                       Text(
                         "Already Have Account ?",
-                        style: textTheme.bodySmall!
-                            .copyWith(color: AppTheme.blackColor),
+                        style: textTheme.bodySmall!.copyWith(
+                            color: themingProvider.isDark
+                                ? AppTheme.white
+                                : AppTheme.blackColor),
                       ),
                       TextButton(
                           onPressed: () {

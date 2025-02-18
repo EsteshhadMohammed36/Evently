@@ -2,6 +2,7 @@ import 'package:event_planning/app_theme.dart';
 import 'package:event_planning/auth/screens/register_screen.dart';
 import 'package:event_planning/firebase_sevice.dart';
 import 'package:event_planning/home_screen.dart';
+import 'package:event_planning/providers/theming_provider.dart';
 import 'package:event_planning/providers/user_provider.dart';
 import 'package:event_planning/widgets/custom_elevated_button.dart';
 import 'package:event_planning/widgets/custom_text_form_field.dart';
@@ -19,11 +20,13 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
   var formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context)!.textTheme;
+    ThemingProvider themingProvider = Provider.of<ThemingProvider>(context);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -43,7 +46,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     hintText: "Email",
                     controller: emailController,
-                    prefixIconPath: "assets/images/email_icon.png",
+                    prefixIconPath: themingProvider.isDark
+                        ? "assets/images/email_dark.png"
+                        : "assets/images/email_icon.png",
                   ),
                   CustomTextFormField(
                     validator: (value) {
@@ -54,7 +59,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     hintText: "Password",
                     isPassword: true,
                     controller: passwordController,
-                    prefixIconPath: "assets/images/password_icon.png",
+                    prefixIconPath: themingProvider.isDark
+                        ? "assets/images/password_dark.png"
+                        : "assets/images/password_icon.png",
                   ),
                   CustomElevatedButton(
                     text: "Login",
@@ -65,8 +72,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       Text(
                         "Don’t Have Account ?",
-                        style: textTheme.bodySmall!
-                            .copyWith(color: AppTheme.blackColor),
+                        style: textTheme.bodySmall!.copyWith(
+                            color: themingProvider.isDark
+                                ? AppTheme.white
+                                : AppTheme.blackColor),
                       ),
                       TextButton(
                           onPressed: () {
@@ -90,7 +99,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     onPressed: () {},
                     text: "Login With Google",
                     isGoogle: true,
-                    backgroundColor: AppTheme.backgroundLight,
+                    backgroundColor: themingProvider.isDark
+                        ? AppTheme.backgroundDark
+                        : AppTheme.backgroundLight,
                     foregroundColor: AppTheme.primary,
                   )
                 ],

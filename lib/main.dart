@@ -3,6 +3,7 @@ import 'package:event_planning/auth/screens/register_screen.dart';
 import 'package:event_planning/create_event.dart';
 import 'package:event_planning/home_screen.dart';
 import 'package:event_planning/providers/events_provider.dart';
+import 'package:event_planning/providers/theming_provider.dart';
 import 'package:event_planning/providers/user_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,9 @@ Future<void> main() async {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => EventsProvider()..getEvents()),
     ChangeNotifierProvider(create: (_) => UserProvider()),
+    ChangeNotifierProvider(
+      create: (context) => ThemingProvider(),
+    )
   ], child: MyApp()));
 }
 
@@ -36,7 +40,7 @@ class MyApp extends StatelessWidget {
       initialRoute: LoginScreen.routeName,
       theme: AppTheme.light,
       darkTheme: AppTheme.dark,
-      themeMode: ThemeMode.light,
+      themeMode: Provider.of<ThemingProvider>(context).theme,
     );
   }
 }

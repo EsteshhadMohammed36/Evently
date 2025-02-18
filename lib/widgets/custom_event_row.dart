@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../app_theme.dart';
+import '../providers/theming_provider.dart';
 
 class CustomEventRow extends StatelessWidget {
   String event;
@@ -14,6 +18,7 @@ class CustomEventRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemingProvider themingProvider = Provider.of<ThemingProvider>(context);
     var textTheme = Theme.of(context).textTheme;
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8),
@@ -25,8 +30,10 @@ class CustomEventRow extends StatelessWidget {
           ),
           Text(
             event,
-            style:
-                textTheme.displayMedium!.copyWith(fontWeight: FontWeight.w500),
+            style: themingProvider.isDark
+                ? textTheme.bodySmall!.copyWith(color: AppTheme.backgroundLight)
+                : textTheme.displayMedium!
+                    .copyWith(fontWeight: FontWeight.w500),
           ),
           Spacer(),
           InkWell(

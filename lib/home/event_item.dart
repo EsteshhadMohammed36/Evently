@@ -1,5 +1,6 @@
 import 'package:event_planning/app_theme.dart';
 import 'package:event_planning/providers/events_provider.dart';
+import 'package:event_planning/providers/theming_provider.dart';
 import 'package:event_planning/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -21,6 +22,7 @@ class _EventItemState extends State<EventItem> {
   @override
   Widget build(BuildContext context) {
     UserProvider userProvider = Provider.of<UserProvider>(context);
+    ThemingProvider themingProvider = Provider.of<ThemingProvider>(context);
     EventsProvider eventsProvider =
         Provider.of<EventsProvider>(context, listen: false);
     bool isFavorite = userProvider.checkIsFavorite(widget.event.id);
@@ -51,7 +53,9 @@ class _EventItemState extends State<EventItem> {
               height: height * 0.06,
               width: MediaQuery.sizeOf(context).width * 0.12,
               decoration: BoxDecoration(
-                  color: AppTheme.backgroundLight,
+                  color: themingProvider.isDark
+                      ? AppTheme.backgroundDark
+                      : AppTheme.backgroundLight,
                   borderRadius: BorderRadius.circular(8)),
             ),
             Spacer(),
@@ -59,7 +63,9 @@ class _EventItemState extends State<EventItem> {
                 margin: EdgeInsets.all(8),
                 padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                 decoration: BoxDecoration(
-                    color: AppTheme.backgroundLight,
+                    color: themingProvider.isDark
+                        ? AppTheme.backgroundDark
+                        : AppTheme.backgroundLight,
                     borderRadius: BorderRadius.circular(8)),
                 width: double.infinity,
                 child: Row(
@@ -68,7 +74,10 @@ class _EventItemState extends State<EventItem> {
                       flex: 9,
                       child: Text(
                         (widget.event.title),
-                        style: textTheme.displayMedium,
+                        style: themingProvider.isDark
+                            ? textTheme.displayMedium
+                                ?.copyWith(color: AppTheme.backgroundLight)
+                            : textTheme.displayMedium,
                       ),
                     ),
                     Spacer(),

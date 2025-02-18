@@ -24,7 +24,7 @@ class EventModel {
             title: json['title'],
             description: json['description'],
             dateTime: (json['timestamp'] as Timestamp).toDate(),
-            category: CategoryModel.categories
+            category: CategoryModel.categoriesDark
                 .firstWhere((category) => json['categoryId'] == category.id));
 
   Map<String, dynamic> toJson() => {
