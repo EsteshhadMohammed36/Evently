@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class CategoryModel {
   String id;
@@ -12,6 +13,32 @@ class CategoryModel {
     this.imageName,
     required this.icon,
   });
+
+  String getLocalization(BuildContext context) {
+    var l10n = AppLocalizations.of(context)!;
+    switch (name) {
+      case "Sport":
+        return l10n.sport;
+      case "Birthday":
+        return l10n.birthday;
+      case "Exhibition":
+        return l10n.exhibition;
+      case "Eating":
+        return l10n.eating;
+      case "Book Club":
+        return l10n.bookClub;
+      case "Workshop":
+        return l10n.workShop;
+      case "Gaming":
+        return l10n.gaming;
+      case "Holiday":
+        return l10n.holiday;
+      case "Meeting":
+        return l10n.meeting;
+      default:
+        return name;
+    }
+  }
 
   static List<CategoryModel> categories = [
     CategoryModel(

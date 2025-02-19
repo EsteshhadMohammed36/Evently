@@ -9,6 +9,7 @@ import 'package:event_planning/providers/user_provider.dart';
 import 'package:event_planning/widgets/custom_event_row.dart';
 import 'package:event_planning/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -34,11 +35,12 @@ class _CreateEventState extends State<CreateEvent> {
 
   @override
   Widget build(BuildContext context) {
+    var l10n = AppLocalizations.of(context)!;
     var textTheme = Theme.of(context).textTheme;
     ThemingProvider themingProvider = Provider.of<ThemingProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text("Create Event"),
+        title: Text(l10n.createEvent),
       ),
       body: Column(
         children: [
@@ -83,7 +85,7 @@ class _CreateEventState extends State<CreateEvent> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
-                        "Title",
+                        l10n.title,
                         style: textTheme.bodySmall!
                             .copyWith(color: AppTheme.blackColor),
                       ),
@@ -92,10 +94,10 @@ class _CreateEventState extends State<CreateEvent> {
                             ? "assets/images/title_dark.png"
                             : "assets/images/title_icon.png",
                         controller: titleController,
-                        hintText: "Event Title",
+                        hintText: l10n.eventTitle,
                         validator: (value) {
                           if (value == null || value.isEmpty)
-                            return "Title can not be empty";
+                            return l10n.titleEmptyMsg;
                           return null;
                         },
                       ),
@@ -103,7 +105,7 @@ class _CreateEventState extends State<CreateEvent> {
                         height: 16,
                       ),
                       Text(
-                        "Description",
+                        l10n.desc,
                         style: textTheme.bodySmall!
                             .copyWith(color: AppTheme.blackColor),
                       ),
@@ -111,10 +113,10 @@ class _CreateEventState extends State<CreateEvent> {
                         prefixIconPath: null,
                         controller: descriptionController,
                         maxLines: 5,
-                        hintText: "Event Description",
+                        hintText: l10n.eventDesc,
                         validator: (value) {
                           if (value == null || value.isEmpty)
-                            return "Description can not be empty";
+                            return l10n.descEmptyMsg;
                           return null;
                         },
                       ),
@@ -122,9 +124,9 @@ class _CreateEventState extends State<CreateEvent> {
                         image: themingProvider.isDark
                             ? "assets/images/event_date_dark.png"
                             : "assets/images/event_date.png",
-                        event: "Event Date",
+                        event: l10n.eventDate,
                         choice: selectedDate == null
-                            ? "Choose Date"
+                            ? l10n.chDate
                             : dateFormat.format(selectedDate!),
                         choiceTap: () async {
                           DateTime? date = await showDatePicker(
@@ -142,9 +144,9 @@ class _CreateEventState extends State<CreateEvent> {
                         },
                       ),
                       CustomEventRow(
-                        event: "Event Time",
+                        event: l10n.eventTime,
                         choice: selectedTime == null
-                            ? "Choose Time"
+                            ? l10n.chTime
                             : "${selectedTime!.format(context)}",
                         image: themingProvider.isDark
                             ? "assets/images/event_time_dark.png"
@@ -171,7 +173,7 @@ class _CreateEventState extends State<CreateEvent> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: CustomElevatedButton(
-                onPressed: createEvents, text: "Add Event"),
+                onPressed: createEvents, text: l10n.addEvent),
           )
         ],
       ),

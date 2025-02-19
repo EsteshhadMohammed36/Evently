@@ -5,9 +5,11 @@ import 'package:provider/provider.dart';
 
 class CustomContainer extends StatelessWidget {
   String? text;
-  CustomContainer({
-    required this.text,
-  });
+  List<DropdownMenuItem<dynamic>>? items;
+  void Function(dynamic?)? onChanged;
+
+  CustomContainer(
+      {required this.text, required this.items, required this.onChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -27,26 +29,15 @@ class CustomContainer extends StatelessWidget {
           ),
           Spacer(),
           DropdownButton(
-            style: textTheme.bodyMedium!.copyWith(fontSize: 16),
-            dropdownColor: themingProvider.isDark
-                ? AppTheme.backgroundDark
-                : AppTheme.backgroundLight,
-            iconEnabledColor: AppTheme.primary,
-            iconSize: 35,
-            underline: SizedBox(),
-            items: Provider.of<ThemingProvider>(context, listen: false)
-                .menu
-                .map((theme) => DropdownMenuItem(
-                      value: theme.themeMode,
-                      child: Text(theme.themeName ?? ""),
-                    ))
-                .toList(),
-            onChanged: (selectedTheme) {
-              if (selectedTheme != null) {
-                themingProvider.changeTheme(selectedTheme);
-              }
-            },
-          )
+              style: textTheme.bodyMedium!.copyWith(fontSize: 16),
+              iconEnabledColor: AppTheme.primary,
+              iconSize: 35,
+              underline: SizedBox(),
+              dropdownColor: themingProvider.isDark
+                  ? AppTheme.backgroundDark
+                  : AppTheme.backgroundLight,
+              items: items,
+              onChanged: onChanged)
         ],
       ),
     );
