@@ -42,7 +42,7 @@ class TabItem extends StatelessWidget {
             width: 8,
           ),
           Text(
-            category.name,
+            category.getLocalization(context),
             style: isSelected
                 ? Theme.of(context).textTheme.bodySmall!.copyWith(
                     color: (themingProvider.isDark

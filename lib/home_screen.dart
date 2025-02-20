@@ -5,6 +5,7 @@ import 'package:event_planning/love/love_tab.dart';
 import 'package:event_planning/map/map_tab.dart';
 import 'package:event_planning/profile/profile_tab.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = "/home_screen";
@@ -22,6 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var l10n = AppLocalizations.of(context)!;
     return SafeArea(
         child: Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -51,19 +53,19 @@ class _HomeScreenState extends State<HomeScreen> {
           items: [
             BottomNavigationBarItem(
                 activeIcon: BottomNavBarItem(imageName: "home_selected"),
-                label: "Home",
+                label: l10n.home,
                 icon: BottomNavBarItem(imageName: "home")),
             BottomNavigationBarItem(
                 activeIcon: BottomNavBarItem(imageName: "map_selected"),
-                label: "Map",
+                label: l10n.map,
                 icon: BottomNavBarItem(imageName: "map")),
             BottomNavigationBarItem(
                 activeIcon: BottomNavBarItem(imageName: "love_selected"),
-                label: "Love",
+                label: l10n.love,
                 icon: BottomNavBarItem(imageName: "love")),
             BottomNavigationBarItem(
                 activeIcon: BottomNavBarItem(imageName: "profile_selected"),
-                label: "Profile",
+                label: l10n.profile,
                 icon: BottomNavBarItem(imageName: "profile")),
           ],
         ),

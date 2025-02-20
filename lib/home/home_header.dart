@@ -5,6 +5,7 @@ import 'package:event_planning/providers/events_provider.dart';
 import 'package:event_planning/providers/theming_provider.dart';
 import 'package:event_planning/providers/user_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 import '../models/user_model.dart';
@@ -42,7 +43,7 @@ class _HomeHeaderState extends State<HomeHeader> {
           children: [
             Text(
               textAlign: TextAlign.start,
-              "Welcome Back ✨",
+              AppLocalizations.of(context)!.welcome,
               style: textTheme.displaySmall,
             ),
             Text(
@@ -70,7 +71,9 @@ class _HomeHeaderState extends State<HomeHeader> {
                     tabs: [
                       TabItem(
                           category: CategoryModel(
-                              id: "0", name: "All", icon: Icons.all_out),
+                              id: "0",
+                              name: AppLocalizations.of(context)!.all,
+                              icon: Icons.all_out),
                           backgroundSelected: themingProvider.isDark
                               ? AppTheme.primary
                               : AppTheme.backgroundLight,

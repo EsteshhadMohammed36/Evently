@@ -8,6 +8,7 @@ import 'package:event_planning/widgets/custom_elevated_button.dart';
 import 'package:event_planning/widgets/custom_text_form_field.dart';
 import 'package:event_planning/widgets/evently_logo.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -41,10 +42,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   CustomTextFormField(
                     validator: (value) {
                       if (value == null || value.trim().length < 5)
-                        return "Invalid Email";
+                        return AppLocalizations.of(context)!.invalidEmail;
                       return null;
                     },
-                    hintText: "Email",
+                    hintText: AppLocalizations.of(context)!.email,
                     controller: emailController,
                     prefixIconPath: themingProvider.isDark
                         ? "assets/images/email_dark.png"
@@ -53,10 +54,10 @@ class _LoginScreenState extends State<LoginScreen> {
                   CustomTextFormField(
                     validator: (value) {
                       if (value == null || value.trim().length < 8)
-                        return "Password cannot be less than 8";
+                        return AppLocalizations.of(context)!.passCanNotBeLess8;
                       return null;
                     },
-                    hintText: "Password",
+                    hintText: AppLocalizations.of(context)!.password,
                     isPassword: true,
                     controller: passwordController,
                     prefixIconPath: themingProvider.isDark
@@ -64,14 +65,14 @@ class _LoginScreenState extends State<LoginScreen> {
                         : "assets/images/password_icon.png",
                   ),
                   CustomElevatedButton(
-                    text: "Login",
+                    text: AppLocalizations.of(context)!.login,
                     onPressed: login,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Don’t Have Account ?",
+                        AppLocalizations.of(context)!.doNotHaveAccount,
                         style: textTheme.bodySmall!.copyWith(
                             color: themingProvider.isDark
                                 ? AppTheme.white
@@ -82,14 +83,15 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.of(context)
                                 .pushReplacementNamed(RegisterScreen.routeName);
                           },
-                          child: Text("Create Account"))
+                          child:
+                              Text(AppLocalizations.of(context)!.createAccount))
                     ],
                   ),
                   Row(
                     children: [
                       Expanded(child: Divider()),
                       Text(
-                        "Or",
+                        AppLocalizations.of(context)!.or,
                         style: textTheme.bodyMedium,
                       ),
                       Expanded(child: Divider()),
@@ -97,7 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   CustomElevatedButton(
                     onPressed: () {},
-                    text: "Login With Google",
+                    text: AppLocalizations.of(context)!.loginWithGoogle,
                     isGoogle: true,
                     backgroundColor: themingProvider.isDark
                         ? AppTheme.backgroundDark

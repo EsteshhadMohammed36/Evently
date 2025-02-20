@@ -8,6 +8,7 @@ import 'package:event_planning/widgets/custom_elevated_button.dart';
 import 'package:event_planning/widgets/custom_text_form_field.dart';
 import 'package:event_planning/widgets/evently_logo.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -40,7 +41,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 children: [
                   EventlyLogo(),
                   CustomTextFormField(
-                    hintText: "Name",
+                    hintText: AppLocalizations.of(context)!.name,
                     controller: nameController,
                     prefixIconPath: themingProvider.isDark
                         ? "assets/images/profile_dark.png"
@@ -49,10 +50,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   CustomTextFormField(
                     validator: (value) {
                       if (value == null || value.trim().length < 5)
-                        return "Invalid Email";
+                        return AppLocalizations.of(context)!.invalidEmail;
                       return null;
                     },
-                    hintText: "Email",
+                    hintText: AppLocalizations.of(context)!.email,
                     controller: emailController,
                     prefixIconPath: themingProvider.isDark
                         ? "assets/images/email_dark.png"
@@ -61,10 +62,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   CustomTextFormField(
                     validator: (value) {
                       if (value == null || value.trim().length < 8)
-                        return "Password cannot be less than 8";
+                        return AppLocalizations.of(context)!.passCanNotBeLess8;
                       return null;
                     },
-                    hintText: "Password",
+                    hintText: AppLocalizations.of(context)!.password,
                     isPassword: true,
                     controller: passwordController,
                     prefixIconPath: themingProvider.isDark
@@ -72,14 +73,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         : "assets/images/password_icon.png",
                   ),
                   CustomElevatedButton(
-                    text: "Create Account",
+                    text: AppLocalizations.of(context)!.register,
                     onPressed: createAccount,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Already Have Account ?",
+                        AppLocalizations.of(context)!.haveAccount,
                         style: textTheme.bodySmall!.copyWith(
                             color: themingProvider.isDark
                                 ? AppTheme.white
@@ -90,7 +91,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             Navigator.of(context)
                                 .pushReplacementNamed(LoginScreen.routeName);
                           },
-                          child: Text("Login"))
+                          child: Text(AppLocalizations.of(context)!.login))
                     ],
                   ),
                 ],
