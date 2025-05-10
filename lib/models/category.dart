@@ -16,15 +16,15 @@ class Category {
   static List<Category> categories = [
     Category(
       id: "1",
-      name: "Birthday",
-      imageName: "birthday",
-      icon: Icons.cake_outlined,
+      name: "Sport",
+      imageName: "sport",
+      icon: Icons.directions_bike,
     ),
     Category(
       id: "2",
-      name: "Meeting",
-      imageName: "meeting",
-      icon: Icons.work_history_outlined,
+      name: "Birthday",
+      imageName: "birthday",
+      icon: Icons.cake_outlined,
     ),
     Category(
       id: "3",
@@ -64,9 +64,9 @@ class Category {
     ),
     Category(
       id: "9",
-      name: "Holiday",
-      imageName: "holiday",
-      icon: Icons.holiday_village_outlined,
+      name: "Meeting",
+      imageName: "meeting",
+      icon: Icons.work_history_outlined,
     ),
   ];
 }

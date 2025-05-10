@@ -1,6 +1,6 @@
 import 'package:event_planning/app_theme.dart';
-import 'package:event_planning/home/category.dart';
 import 'package:event_planning/home/tab_item.dart';
+import 'package:event_planning/models/category.dart';
 import 'package:flutter/material.dart';
 
 class HomeHeader extends StatefulWidget {
