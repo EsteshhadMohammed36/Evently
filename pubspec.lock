@@ -262,7 +262,7 @@ packages:
     source: hosted
     version: "4.5.2"
   intl:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: intl
       sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
@@ -406,7 +406,7 @@ packages:
     source: hosted
     version: "6.1.2"
   shared_preferences:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: shared_preferences
       sha256: d3bbe5553a986e83980916ded2f0b435ef2e1893dfaa29d5a7a790d0eca12180

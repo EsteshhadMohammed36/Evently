@@ -2,7 +2,7 @@
   "login": "دخول",
   "register": "إنشاء حساب",
   "createAccount": "إنشاء حساب",
-  "loginWithGoogle": "تسجيل الدخول باستخدام جوجل",
+  "loginWithGoogle": "تسجيل الدخول باستخدام حساب جوجل",
   "name": "الاسم",
   "email": "البريد الالكتروني",
   "password": "كلمة السر",
